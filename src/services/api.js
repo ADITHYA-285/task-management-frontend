@@ -1,5 +1,6 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
+// LOGIN
 export const loginUser = async (email, password) => {
     const response = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
@@ -13,10 +14,121 @@ export const loginUser = async (email, password) => {
     });
 
     const data = await response.json();
-    console.log(data);
 
     if (!response.ok) {
         throw new Error(data.message || "Login failed");
+    }
+
+    return data;
+};
+
+
+// REGISTER
+export const registerUser = async (name, email, password) => {
+    const response = await fetch(`${API_URL}/api/auth/register`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            name,
+            email,
+            password
+        })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.message || "Registration failed");
+    }
+
+    return data;
+};
+
+
+// CREATE TASK
+export const createTask = async (taskData) => {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(`${API_URL}/api/tasks`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(taskData)
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.message || "Failed to create task");
+    }
+
+    return data;
+};
+
+
+// GET TASKS
+export const getTasks = async () => {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(`${API_URL}/api/tasks`, {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.message || "Failed to fetch tasks");
+    }
+
+    return data;
+};
+
+
+// UPDATE TASK
+export const updateTask = async (id, taskData) => {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(`${API_URL}/api/tasks/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(taskData)
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.message || "Failed to update task");
+    }
+
+    return data;
+};
+
+
+// DELETE TASK
+export const deleteTask = async (id) => {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(`${API_URL}/api/tasks/${id}`, {
+        method: "DELETE",
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.message || "Failed to delete task");
     }
 
     return data;
