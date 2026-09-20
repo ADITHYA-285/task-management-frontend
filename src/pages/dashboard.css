@@ -477,9 +477,10 @@ body {
     gap: 10px;
 }
 
-.edit-btn,
 .delete-btn {
     border: none;
+
+    background: #dc2626;
 
     color: white;
 
@@ -491,30 +492,41 @@ body {
 
     font-size: 14px;
 
-    font-family: Arial, sans-serif;
-
     font-weight: 500;
 
-    line-height: 1.2;
-
     transition: 0.2s;
-}
-
-.edit-btn {
-    background: #4f46e5;
-}
-
-.edit-btn:hover {
-    background: #4338ca;
-}
-
-.delete-btn {
-    background: #dc2626;
 }
 
 .delete-btn:hover {
     background: #b91c1c;
 }
+
+.edit-btn {
+    border: none;
+
+    background: #4f46e5;
+
+    color: #ffffff;
+
+    padding: 9px 16px;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.edit-btn:hover {
+    background: #4338ca;
+
+    transform: translateY(-1px);
+}
+
 
 /* =========================
    EMPTY STATE

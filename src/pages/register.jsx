@@ -15,6 +15,8 @@ const Register = () => {
 
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const handleChange = (e) => {
         setFormData({
@@ -111,28 +113,54 @@ const Register = () => {
                     </div>
 
                     <div className="form-group">
-                        <label>Password</label>
+    <label>Password</label>
 
-                        <input
-                            type="password"
-                            name="password"
-                            placeholder="Create a password"
-                            value={formData.password}
-                            onChange={handleChange}
-                        />
-                    </div>
+    <div className="input-wrapper">
 
-                    <div className="form-group">
-                        <label>Confirm Password</label>
+        <input
+            type={showPassword ? "text" : "password"}
+            name="password"
+            placeholder="Create a password"
+            value={formData.password}
+            onChange={handleChange}
+        />
 
-                        <input
-                            type="password"
-                            name="confirmPassword"
-                            placeholder="Confirm your password"
-                            value={formData.confirmPassword}
-                            onChange={handleChange}
-                        />
-                    </div>
+        <button
+            type="button"
+            className="password-toggle"
+            onClick={() => setShowPassword(!showPassword)}
+        >
+            {showPassword ? "Hide" : "Show"}
+        </button>
+
+    </div>
+</div>
+
+                  <div className="form-group">
+    <label>Confirm Password</label>
+
+    <div className="input-wrapper">
+
+        <input
+            type={showConfirmPassword ? "text" : "password"}
+            name="confirmPassword"
+            placeholder="Confirm your password"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+        />
+
+        <button
+            type="button"
+            className="password-toggle"
+            onClick={() =>
+                setShowConfirmPassword(!showConfirmPassword)
+            }
+        >
+            {showConfirmPassword ? "Hide" : "Show"}
+        </button>
+
+    </div>
+</div>
 
                     <button
                         type="submit"

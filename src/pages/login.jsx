@@ -8,6 +8,7 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
 
     const navigate = useNavigate();
 
@@ -131,30 +132,40 @@ const Login = () => {
 
                     <div className="login-form-group">
 
-                        <label htmlFor="password">
-                            Password
-                        </label>
+    <label htmlFor="password">
+        Password
+    </label>
 
-                        <div className="input-wrapper">
+    <div className="input-wrapper">
 
-                            <span className="input-icon">
-                                🔒
-                            </span>
+        <span className="input-icon">
+            🔒
+        </span>
 
-                            <input
-                                id="password"
-                                type="password"
-                                placeholder="Enter your password"
-                                value={password}
-                                onChange={(e) =>
-                                    setPassword(e.target.value)
-                                }
-                                required
-                            />
+        <input
+            id="password"
+            type={showPassword ? "text" : "password"}
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) =>
+                setPassword(e.target.value)
+            }
+            required
+        />
 
-                        </div>
+        <button
+            type="button"
+            className="password-toggle"
+            onClick={() =>
+                setShowPassword(!showPassword)
+            }
+        >
+            {showPassword ? "Hide" : "Show"}
+        </button>
 
-                    </div>
+    </div>
+
+</div>
 
                     <p className="register-link">
                         Don't have an account?{" "}
