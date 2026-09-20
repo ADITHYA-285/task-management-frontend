@@ -32,7 +32,7 @@ const Dashboard = () => {
         const token = localStorage.getItem("token");
 
         const response = await fetch(
-            `${API_URL}/api/tasks`,
+             `${API_URL}/api/tasks`,
             {
                 method: "GET",
                 headers: {
