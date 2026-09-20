@@ -1,4 +1,5 @@
-const API_URL = "http://localhost:5000";
+// const API_URL = "http://localhost:5000";
+const API_URL = "https://task-management-backend-3cmi5oziz-adithyas-projects-e20db2dd.vercel.app";
 
 export const loginUser = async (email, password) => {
     const response = await fetch(`${API_URL}/api/auth/login`, {
@@ -25,7 +26,7 @@ export const loginUser = async (email, password) => {
 export const createTask = async (taskData) => {
     const token = localStorage.getItem("token");
 
-    const response = await fetch("http://localhost:5000/api/tasks", {
+    const response = await fetch("${API_URL}/api/tasks", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -101,7 +102,7 @@ export const updateTask = async (id, taskData) => {
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-        `http://localhost:5000/api/tasks/${id}`,
+        `${API_URL}/api/tasks/${id}`,
         {
             method: "PUT",
             headers: {
@@ -126,7 +127,7 @@ export const deleteTask = async (id) => {
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-        `http://localhost:5000/api/tasks/${id}`,
+        `${API_URL}/api/tasks/${id}`,
         {
             method: "DELETE",
             headers: {
