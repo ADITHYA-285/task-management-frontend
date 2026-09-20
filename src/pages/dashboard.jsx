@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CreateTask from "../components/createtask";
 import EditTask from "../components/edittask";
-import { deleteTask } from "../services/api";
+import { getTasks, deleteTask } from "../services/api";
 import "./dashboard.css";
 
 const Dashboard = () => {
@@ -25,41 +25,32 @@ const Dashboard = () => {
 
         setUserName(name || "User");
 
-        getTasks();
+        loadTasks();
     }, []);
 
-    const getTasks = async () => {
-        const token = localStorage.getItem("token");
-
-        const response = await fetch(
-             `${API_URL}/api/tasks`,
-            {
-                method: "GET",
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            }
-        );
-
-        const data = await response.json();
-
-        console.log("Tasks:", data);
-
-        setTasks(data.tasks || []);
-    };
-
-    const handleDelete = async (id) => {
+    const loadTasks = async () => {
         try {
-            await deleteTask(id);
+            const data = await getTasks();
 
-            getTasks();
+            console.log("Tasks:", data);
 
+            setTasks(data.tasks || []);
         } catch (error) {
             console.error(error);
-
-            alert(error.message);
         }
     };
+   const handleDelete = async (id) => {
+    try {
+        await deleteTask(id);
+
+        loadTasks();
+
+    } catch (error) {
+        console.error(error);
+
+        alert(error.message);
+    }
+};
 
     // Statistics
     const totalTasks = tasks.length;
@@ -180,7 +171,7 @@ const Dashboard = () => {
                     </div>
 
                     <CreateTask
-                        onTaskCreated={getTasks}
+                        onTaskCreated={loadTasks}
                     />
 
                 </section>
@@ -194,7 +185,7 @@ const Dashboard = () => {
                             task={editingTask}
 
                             onTaskUpdated={() => {
-                                getTasks();
+                                loadTasks();
                                 setEditingTask(null);
                             }}
 
