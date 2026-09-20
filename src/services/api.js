@@ -1,6 +1,5 @@
 // const API_URL = "http://localhost:5000";
-const API_URL = "https://task-management-backend-3cmi5oziz-adithyas-projects-e20db2dd.vercel.app";
-
+const API_URL = "https://task-management-backend-938tb08px-adithyas-projects-e20db2dd.vercel.app";
 export const loginUser = async (email, password) => {
     const response = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
